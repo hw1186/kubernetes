@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: ploio-agent-daemonset
+  namespace: monitoring
+spec:
+  selector:
+    matchLabels:
+      app: ploio-agent
+  template:
+    metadata:
+      labels:
+        app: ploio-agent
+    spec:
+      containers:
+      - name: ploio-agent
+        image: hw1186/agent:latest
+        ports:
+        - containerPort: 65001

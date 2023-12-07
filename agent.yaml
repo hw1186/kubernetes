@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: your-agent-daemonset
+  namespace: monitoring
+spec:
+  selector:
+    matchLabels:
+      app: your-agent
+  template:
+    metadata:
+      labels:
+        app: your-agent
+    spec:
+      containers:
+      - name: your-agent
+        image: hw1186/agent:latest
+        ports:
+        - containerPort: 80 # 사용하는 포트가 있으면 여기에 지정합니다.
+      # Host 네트워크를 사용하려면 아래 줄의 주석을 해제합니다.
+      # hostNetwork: true
+      # DNS 정책을 설정하려면 아래 줄의 주석을 해제합니다.
+      # dnsPolicy: ClusterFirstWithHostNet
+  # 노드 선택기를 사용하여 특정 노드에만 에이전트를 배포하려면 아래 줄의 주석을 해제하고 조건을 수정합니다.
+  # nodeSelector:
+  #   your-label: your-value
